@@ -1,0 +1,19 @@
+E:\MNR\Service\MNRService\MNRService\bin\Release\MNRService.exe.config
+E:\MNR\Service\MNRService\MNRService\bin\Release\MNRService.exe
+E:\MNR\Service\MNRService\MNRService\bin\Release\MNRService.pdb
+E:\MNR\Service\MNRService\MNRService\obj\Release\Logstar2EDI.csproj.CoreCompileInputs.cache
+E:\MNR\Service\MNRService\MNRService\obj\Release\MNRService.exe
+E:\MNR\Service\MNRService\MNRService\obj\Release\MNRService.pdb
+E:\MNR\Service\MNRService\MNRService\obj\Release\Logstar2EDI.csprojAssemblyReference.cache
+G:\MNRService\bin\Release\MNRService.exe.config
+G:\MNRService\bin\Release\MNRService.exe
+G:\MNRService\bin\Release\MNRService.pdb
+G:\MNRService\obj\Release\Logstar2EDI.csproj.CoreCompileInputs.cache
+G:\MNRService\obj\Release\MNRService.exe
+G:\MNRService\obj\Release\MNRService.pdb
+E:\Updated Westim service\MNRService\bin\Release\MNRService.exe.config
+E:\Updated Westim service\MNRService\bin\Release\MNRService.exe
+E:\Updated Westim service\MNRService\bin\Release\MNRService.pdb
+E:\Updated Westim service\MNRService\obj\Release\Logstar2EDI.csproj.CoreCompileInputs.cache
+E:\Updated Westim service\MNRService\obj\Release\MNRService.exe
+E:\Updated Westim service\MNRService\obj\Release\MNRService.pdb
