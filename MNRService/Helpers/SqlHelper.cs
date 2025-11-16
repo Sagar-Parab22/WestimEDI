@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -64,12 +65,12 @@ namespace MNRService.Helpers
         }
 
         // Executes a text query that doesn't return a value
-        public static int ExecuteNonQueryText(string queryFileName, params SqlParameter[] parameters)
+        public static int ExecuteNonQueryText(string queryFileName, params MySqlParameter[] parameters)
         {
             string queryText = GetQueryText(queryFileName);
 
-            using (var conn = new SqlConnection(GetConnectionString()))
-            using (var cmd = new SqlCommand(queryText, conn))
+            using (var conn = new MySqlConnection(GetConnectionString()))
+            using (var cmd = new MySqlCommand(queryText, conn))
             {
                 cmd.CommandType = CommandType.Text; // Use CommandType.Text
                 if (parameters != null)
@@ -83,12 +84,12 @@ namespace MNRService.Helpers
         }
 
         // Executes a text query that returns a SqlDataReader
-        public static SqlDataReader ExecuteReaderText(string queryFileName, params SqlParameter[] parameters)
+        public static MySqlDataReader ExecuteReaderText(string queryFileName, params MySqlParameter[] parameters)
         {
             string queryText = GetQueryText(queryFileName);
-            var conn = new SqlConnection(GetConnectionString());
+            var conn = new MySqlConnection(GetConnectionString());
 
-            using (var cmd = new SqlCommand(queryText, conn))
+            using (var cmd = new MySqlCommand(queryText, conn))
             {
                 cmd.CommandType = CommandType.Text; // Use CommandType.Text
                 if (parameters != null)
@@ -102,12 +103,12 @@ namespace MNRService.Helpers
         }
 
         // Executes a text query that returns an output parameter
-        public static string ExecuteNonQueryOutputResultText(string queryFileName, string outputParamName, params SqlParameter[] parameters)
+        public static string ExecuteNonQueryOutputResultText(string queryFileName, string outputParamName, params MySqlParameter[] parameters)
         {
             string queryText = GetQueryText(queryFileName);
 
-            using (var conn = new SqlConnection(GetConnectionString()))
-            using (var cmd = new SqlCommand(queryText, conn))
+            using (var conn = new MySqlConnection(GetConnectionString()))
+            using (var cmd = new MySqlCommand(queryText, conn))
             {
                 cmd.CommandType = CommandType.Text; // Use CommandType.Text
                 if (parameters != null)
@@ -118,7 +119,7 @@ namespace MNRService.Helpers
                 conn.Open();
                 cmd.ExecuteNonQuery();
 
-                foreach (SqlParameter param in cmd.Parameters)
+                foreach (MySqlParameter param in cmd.Parameters)
                 {
                     if (param.Direction == ParameterDirection.Output && param.ParameterName.Equals(outputParamName, StringComparison.OrdinalIgnoreCase))
                     {

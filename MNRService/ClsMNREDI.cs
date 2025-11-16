@@ -1,5 +1,6 @@
 ﻿using MNRService.Helpers;
 using MNRService.Models;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,7 +22,7 @@ namespace MNRService
         {
             var listEDIMsgDtls = new List<MNREDI>();
 
-            using (SqlDataReader rdr = SqlHelper.ExecuteReaderText("GetEDILogId.sql"))
+            using (MySqlDataReader rdr = SqlHelper.ExecuteReaderText("GetEDILogId.sql"))
             {
                 while (rdr.Read())
                 {
@@ -55,9 +56,9 @@ namespace MNRService
         public List<MNREDI> GetEDIActivityDetails(long EDILogId)
         {
             var ListEDIContainerDtls = new List<MNREDI>();
-            var parameters = new[] { new SqlParameter("@EDILogId", EDILogId) };
+            var parameters = new[] { new MySqlParameter("@EDILogId", EDILogId) };
 
-            using (SqlDataReader dr = SqlHelper.ExecuteReaderText("GetEDIActivityDetails.sql", parameters))
+            using (MySqlDataReader dr = SqlHelper.ExecuteReaderText("GetEDIActivityDetails.sql", parameters))
             {
                 while (dr.Read())
                 {
@@ -95,9 +96,9 @@ namespace MNRService
         public List<NewEDIFormatLine> GetNewEDIFormatDetails(long EDILogId)
         {
             var listNewFormatDetails = new List<NewEDIFormatLine>();
-            var parameters = new[] { new SqlParameter("@EDILogId", EDILogId) };
+            var parameters = new[] { new MySqlParameter("@EDILogId", EDILogId) };
 
-            using (SqlDataReader dr = SqlHelper.ExecuteReaderText("GetNewEDIFormatDetails.sql", parameters))
+            using (MySqlDataReader dr = SqlHelper.ExecuteReaderText("GetNewEDIFormatDetails.sql", parameters))
             {
                 while (dr.Read())
                 {
@@ -267,9 +268,9 @@ namespace MNRService
         public List<MNRMSKEDI> GetMSKEDIActivityDetails(long EDILogId)
         {
             var ListEDIContainerDtls = new List<MNRMSKEDI>();
-            var parameters = new[] { new SqlParameter("@EDILogId", EDILogId) };
+            var parameters = new[] { new MySqlParameter("@EDILogId", EDILogId) };
 
-            using (SqlDataReader dr = SqlHelper.ExecuteReaderText("GetMSKEDIActivityDetails.sql", parameters))
+            using (MySqlDataReader dr = SqlHelper.ExecuteReaderText("GetMSKEDIActivityDetails.sql", parameters))
             {
                 while (dr.Read())
                 {
@@ -330,9 +331,9 @@ namespace MNRService
         public List<MNRMSKEDI> GetDemageImageForEDI(long EDILogId)
         {
             var ListEDIContainerDtls = new List<MNRMSKEDI>();
-            var parameters = new[] { new SqlParameter("@EDILogId", EDILogId) };
+            var parameters = new[] { new MySqlParameter("@EDILogId", EDILogId) };
 
-            using (SqlDataReader dr = SqlHelper.ExecuteReaderText("GetDemageImageForEDI.sql", parameters))
+            using (MySqlDataReader dr = SqlHelper.ExecuteReaderText("GetDemageImageForEDI.sql", parameters))
             {
                 while (dr.Read())
                 {
@@ -372,9 +373,9 @@ namespace MNRService
         {
             var parameters = new[]
             {
-                new SqlParameter("@EDILogId", EDILogId),
-                new SqlParameter("@Status", Status),
-                new SqlParameter("@FileName", fileName)
+                new MySqlParameter("@EDILogId", EDILogId),
+                new MySqlParameter("@Status", Status),
+                new MySqlParameter("@FileName", fileName)
             };
             SqlHelper.ExecuteNonQueryText("ManageEDIStatus.sql", parameters);
         }
@@ -459,17 +460,17 @@ namespace MNRService
         {
             var parameters = new[]
             {
-                new SqlParameter("@Sender", sender ?? ""),
-                new SqlParameter("@Receiver", receiver ?? ""),
-                new SqlParameter("@Subject", subject ?? ""),
-                new SqlParameter("@Body", body ?? ""),
-                new SqlParameter("@FilePath", filePath ?? ""),
-                new SqlParameter("@SendDate", sendDate),
-                new SqlParameter("@SenderPassword", password ?? ""),
-                new SqlParameter("@CommunicationTypeID", commTypeID),
-                new SqlParameter("@KeyPath", keyPath ?? ""),
-                new SqlParameter("@HostKeyFingerprint", hostKey ?? ""),
-                new SqlParameter("@ErrorMsg", SqlDbType.VarChar, 7) { Direction = ParameterDirection.Output }
+                new MySqlParameter("@Sender", sender ?? ""),
+                new MySqlParameter("@Receiver", receiver ?? ""),
+                new MySqlParameter("@Subject", subject ?? ""),
+                new MySqlParameter("@Body", body ?? ""),
+                new MySqlParameter("@FilePath", filePath ?? ""),
+                new MySqlParameter("@SendDate", sendDate),
+                new MySqlParameter("@SenderPassword", password ?? ""),
+                new MySqlParameter("@CommunicationTypeID", commTypeID),
+                new MySqlParameter("@KeyPath", keyPath ?? ""),
+                new MySqlParameter("@HostKeyFingerprint", hostKey ?? ""),
+                new MySqlParameter("@ErrorMsg", MySqlDbType.VarChar, 7) { Direction = ParameterDirection.Output }
             };
 
             SqlHelper.ExecuteNonQueryOutputResultText("InsertEmailStructure.sql", "@ErrorMsg", parameters);

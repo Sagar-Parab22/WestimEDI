@@ -1,29 +1,12 @@
-﻿BEGIN TRY
-    -- The core UPDATE statement from the procedure
-    UPDATE mnrtEDILog
-    SET
-        Status = @Status,
-        SentDate = GETDATE(), -- Set SentDate to the current time
-        [FileName] = RIGHT(@FileName, 50) -- Store only the last 50 characters of the filename
-    WHERE
-        ID = @EDILogId;
+﻿-- This script has NO error handling.
+-- If the UPDATE fails, the script will just stop.
 
-    PRINT 'Update successful.'; -- Optional success message
+UPDATE mnrtEDILog
+SET
+    Status = @Status,
+    SentDate = NOW(), -- GETDATE() is NOW() in MySQL
+    `FileName` = RIGHT(@FileName, 50) -- Use backticks for names, not brackets
+WHERE
+    ID = @EDILogId;
 
-END TRY
-BEGIN CATCH
-    PRINT 'Error occurred during update.'; -- Optional error message
-
-    -- Log the error to the ErrorLog table
-    INSERT INTO ErrorLog (
-        [Desc],
-        SpName, -- Use a placeholder name
-        Line,
-        [Date]
-    )
-    SELECT
-        ERROR_MESSAGE(),
-        'DirectQuery_ManageEDIStatus', -- Placeholder name
-        ERROR_LINE(),
-        GETDATE();
-END CATCH;
+SELECT 'Update successful.' AS Message; -- PRINT is SELECT in MySQL

@@ -10,13 +10,13 @@
     ROW_NUMBER() OVER(PARTITION BY MNL.ID ORDER BY MTED.ID ASC) AS LineItemNum, -- [5] (LineItemNum)
     
     -- Field 7: (Repair Code - User Confirmed)
-    LEFT(MTED.RP1Code + ISNULL(MTED.RP2Code,''), 2) AS RepairCode, -- [6] (RepairCode)
+    LEFT(MTED.RP1Code + IFNULL(MTED.RP2Code,''), 2) AS RepairCode, -- [6] (RepairCode)
     
     MTED.LocationCode AS LocationCode,           -- [7] (LocationCode)
     
     -- Field 9: (Material Cost - User Confirmed as 'TotalValue' which maps to MaterialRate)
-    ISNULL(MTED.MaterialRate, 0.0) AS MaterialCost, -- [8] (MaterialCost)
-	(ISNULL(MTED.MaterialRate, 0.0) * ISNULL(MTED.Qty, 0.0)) + ISNULL(MTED.LabourValue, 0.0) AS MaterialValue, -- [9] (MaterialValue)
+    IFNULL(MTED.MaterialRate, 0.0) AS MaterialCost, -- [8] (MaterialCost)
+	(IFNULL(MTED.MaterialRate, 0.0) * IFNULL(MTED.Qty, 0.0)) + IFNULL(MTED.LabourValue, 0.0) AS MaterialValue, -- [9] (MaterialValue)
      --   ISNULL(MTED.MaterialValue, 0.0) AS MaterialValue, -- [9] (MaterialValue)
 
     -- *** SWAPPED THESE TWO COLUMNS ***
